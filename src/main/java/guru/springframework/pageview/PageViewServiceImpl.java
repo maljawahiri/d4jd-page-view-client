@@ -34,5 +34,8 @@ public class PageViewServiceImpl implements PageViewService {
         System.out.println(xmlString);
 
         rabbitTemplate.convertAndSend(RabbitConfig.OUTBOUND_QUEUE_NAME, xmlString);
+
+        //send correlation id to audit queue
+        rabbitTemplate.convertAndSend(RabbitConfig.OUTBOUND_AUDIT_QUEUE_NAME, event.getCorrelationId());
     }
 }
