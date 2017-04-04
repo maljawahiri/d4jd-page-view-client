@@ -2,6 +2,8 @@ package guru.springframework.pageview;
 
 import guru.springframework.config.RabbitConfig;
 import guru.springframework.model.events.PageViewEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import java.io.Writer;
  */
 @Service
 public class PageViewServiceImpl implements PageViewService {
+
+    private static final Logger log = LoggerFactory.getLogger(PageViewServiceImpl.class);
 
     private RabbitTemplate rabbitTemplate;
 
@@ -32,6 +36,9 @@ public class PageViewServiceImpl implements PageViewService {
 
         System.out.println("Sending Message");
         System.out.println(xmlString);
+
+        log.debug("Sending Message");
+        log.debug(xmlString);
 
         rabbitTemplate.convertAndSend(RabbitConfig.OUTBOUND_QUEUE_NAME, xmlString);
 
