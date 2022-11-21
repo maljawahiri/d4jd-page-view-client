@@ -32,7 +32,7 @@ public class PageViewServiceImpl implements PageViewService {
 
         Writer w = new StringWriter();
         JAXB.marshal(event, w);
-        String xmlString =  xmlString = w.toString();
+        String xmlString = w.toString();
 
         System.out.println("Sending Message");
         System.out.println(xmlString);
